@@ -12,7 +12,7 @@ function get(req, res) {
 
         const json = JSON.parse(data);
 
-        return res.status(200).send({ items: JSON.parse(json) });
+        return res.status(200).send({ items: json });
     });
 }
 
