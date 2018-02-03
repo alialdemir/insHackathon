@@ -14,31 +14,56 @@
 
     <div class="row">
         <div class="col-lg-2"></div>
-        <div class="col-lg-8">
-            <div class="alert alert-success" role="alert">
-                This is a success alert—check it out!
+        <div class="col-lg-8 ">
+            <div class="text-center text-title">
+                Template Store
             </div>
             <form action="/api/data" method="post">
                 <div class="form-group">
+                    <label for="exampleFormControlTextarea1">TEMPLATE NAME</label>
+                    <textarea class="form-control" id="name" name="name" rows="3"></textarea>
+                </div>
+                <div class="form-group">
                     <label for="exampleFormControlTextarea1">CSS</label>
                     <textarea class="form-control" id="css" name="css" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">CSS</label>
+                    <textarea class="form-control" id="title" name="title" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">JS</label>
                     <textarea class="form-control" id="js" name="js" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">RULE</label>
-                    <textarea class="form-control" id="rule" name="rule" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">CONFIGSS</label>
+                    <label for="exampleFormControlTextarea1">CONFIGS</label>
                     <textarea class="form-control" id="config" name="config" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Kaydet</button>
             </form>
+            <div class="text-center text-title">
+                Kayıtlar
+            </div>
+            <table class="table table-striped" style="margin-top: 25px;">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Template Name</th>
+                        <th scope="col">Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="#">Dropdown link</a>
+                            <a class="dropdown-item" href="#">Dropdown link</a>
+                        </div>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="col-lg-8"></div>
     </div>
 
 </body>
