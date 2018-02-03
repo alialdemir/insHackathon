@@ -20,23 +20,19 @@
             </div>
             <form action="/api/data" method="post">
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">TEMPLATE NAME</label>
-                    <textarea class="form-control" id="name" name="name" rows="3"></textarea>
+                    <label for="exampleFormControlTextarea1">TİTLE</label>
+                    <textarea class="form-control" id="title" name="title" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">CSS</label>
                     <textarea class="form-control" id="css" name="css" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">CSS</label>
-                    <textarea class="form-control" id="title" name="title" rows="3"></textarea>
-                </div>
-                <div class="form-group">
                     <label for="exampleFormControlTextarea1">JS</label>
                     <textarea class="form-control" id="js" name="js" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">CONFIGS</label>
+                    <label for="exampleFormControlTextarea1">CONFIG</label>
                     <textarea class="form-control" id="config" name="config" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Kaydet</button>
@@ -52,19 +48,55 @@
                         <th scope="col">Edit</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <a class="dropdown-item" href="#">Dropdown link</a>
-                            <a class="dropdown-item" href="#">Dropdown link</a>
-                        </div>
-                    </tr>
-                </tbody>
+                <tbody id="body"></tbody>
             </table>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        function deleteItem(id) {
+            $.ajax({
+                method: "post",
+                url: "/api/template",
+                data: { id }
+            })
+                .done(function (msg) {
+                    alert('Silme işlemi başarılı!');
+                    location.href = '/api/template';
+                });
+        }
+        $(document).ready(function () {
+            $.get("/api/data", function (data) {
+                var arrData = data || [];
+
+                arrData.items.forEach(element => {
+                    $('#body').append(`<tr>
+                                <th scope="row">`+ element.id + `</th>
+                                <td>`+ element.title + `</td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                        <div class="btn-group" role="group">
+                                            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                İşlem
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                <a class="dropdown-item" href="#" onclick="deleteItem(`+ element.id + `)">Sil</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr> `)
+                });
+            });
+
+        });
+    </script>
 
 </body>
 

@@ -24,13 +24,13 @@ function post(req, res) {
         var arrData = JSON.parse(data || []);
         let id = arrData.length > 0 ? arrData[arrData.length - 1].id + 1 : 1;
 
-        let obj = { id, css, js, config };
+        let obj = { id, title, css, js, config };
         arrData.push(obj);
 
         fs.writeFile('data/data.json', JSON.stringify(arrData), 'utf8', (err, data) => {
             if (err) return res.status(500).send({ message: 'Dosya kaydedilemedi.' });
 
-            return res.status(200).send({ message: 'Kayıt edildi.' });
+            return res.status(200).redirect('/api/template');
         });
     });
 }
@@ -41,11 +41,18 @@ function template(req, res) {
 
 function deleteItem(req, res) {
     let id = req.body.id;
+
     fs.readFile('data/data.json', 'utf8', (err, data) => {
         if (err) return res.status(500).send({ message: 'Dosya kaydedilemedi.' });
 
         let arrData = JSON.parse(data);
+        arrData = arrData.filter(p => p.id != id);
 
+        fs.writeFile('data/data.json', JSON.stringify(arrData), 'utf8', (err, data) => {
+            if (err) return res.status(500).send({ message: 'Dosya kaydedilemedi.' });
+
+            return res.status(200).send({ message: 'Silme işlemi başarılı!' });
+        });
     });
 }
 
